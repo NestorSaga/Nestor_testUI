@@ -18,6 +18,9 @@ public class PlayScript : MonoBehaviour
     [SerializeField]
     private Transform leftAnchor, rightAnchor;
 
+    [Header("Utils")]
+    private GameObject instancedLeftGhost, instancedRightGhost;
+
     private void Start()
     {
 
@@ -44,6 +47,8 @@ public class PlayScript : MonoBehaviour
 
     public void OnClickStartPlay()
     {
+
+        UIAudioManagerScript.instance.PlayButton1Event();
         GameManager.instance.StartCrownGame();
         playButton.transform.GetChild(0).GetComponent<Button>().interactable = false;
     }
@@ -52,6 +57,7 @@ public class PlayScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Crown")
         {
+            UIAudioManagerScript.instance.PlayCrownTouchEvent();
             GameManager.instance.IncreaseCrownScore();
             GameManager.instance.UpdateCrownScore();
         }
@@ -67,9 +73,15 @@ public class PlayScript : MonoBehaviour
 
     public void InstantiateGhosts(GameObject ghost)
     {
-        Instantiate(ghost, leftAnchor);
-        Instantiate(ghost, rightAnchor);
+        instancedLeftGhost = Instantiate(ghost, leftAnchor);
+        instancedRightGhost = Instantiate(ghost, rightAnchor);
 
         Debug.Log("instanciaos");
+    }
+
+    public void DestroyInstantiatedGhosts()
+    {
+        Destroy(instancedLeftGhost);
+        Destroy(instancedRightGhost);
     }
 }

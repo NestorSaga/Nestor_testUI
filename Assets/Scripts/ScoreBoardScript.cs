@@ -12,6 +12,9 @@ public class ScoreBoardScript : MonoBehaviour
 
     public void OnClickPopupScoreBoard()
     {
+
+        UIAudioManagerScript.instance.PlayButton2Event();
+
         if (!isScoreBoardOut)
         {
             scoreAnimator.SetBool("ScorePopup", true);
