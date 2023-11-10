@@ -13,7 +13,9 @@ public class PlayScript : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
     [SerializeField]
-    private GameObject parent;
+    private GameObject UIparent;
+    [SerializeField]
+    private GameObject playParent;
     private Vector3 buttonStartingPos;
     [SerializeField]
     private Transform leftAnchor, rightAnchor;
@@ -49,6 +51,7 @@ public class PlayScript : MonoBehaviour
     {
 
         UIAudioManagerScript.instance.PlayButton1Event();
+        transform.parent = playParent.transform;
         GameManager.instance.StartCrownGame();
         playButton.transform.GetChild(0).GetComponent<Button>().interactable = false;
     }
@@ -57,6 +60,10 @@ public class PlayScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Crown")
         {
+            if(collision.transform.position.x > transform.position.x)
+            {
+                Debug.Log("right");
+            }
             UIAudioManagerScript.instance.PlayCrownTouchEvent();
             GameManager.instance.IncreaseCrownScore();
             GameManager.instance.UpdateCrownScore();
@@ -66,6 +73,8 @@ public class PlayScript : MonoBehaviour
     public void resetPlayButton()
     {
         playButton.transform.position = new Vector3(buttonStartingPos.x, buttonStartingPos.y, buttonStartingPos.z);
+
+        transform.parent = UIparent.transform;
 
         Debug.Log("resetted to " + new Vector3(buttonStartingPos.x, buttonStartingPos.y, buttonStartingPos.z));
         playButton.transform.GetChild(0).GetComponent<Button>().interactable = true;

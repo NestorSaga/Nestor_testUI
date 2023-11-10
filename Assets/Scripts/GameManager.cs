@@ -12,9 +12,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject crown;
     private Rigidbody2D rb;
-    private Vector3 startingCrownPos;
+    private Vector3 startingCrownPos;    
     private ScoreBoardScript scoreBoardScript;
     private MenuManagerScript menuManagerScript;
+    [SerializeField]
+    private Transform trophyItemSpawnPos;
+    [SerializeField]
+    private GameObject trophyItemPrefab;
     [SerializeField]
     private PlayScript playScript;
     [SerializeField]
@@ -27,6 +31,8 @@ public class GameManager : MonoBehaviour
     private GameObject[] ghostPrefabs;
     [SerializeField]
     private Image[] skinBackgrounds;
+    [SerializeField]
+    private Sprite[] randomDropItems;
     [SerializeField]
     private Animator ghostsAnimator;
 
@@ -49,6 +55,10 @@ public class GameManager : MonoBehaviour
     private int touchesForSkin2Unlock;
     [SerializeField]
     private int touchesForSkin3Unlock;
+    [SerializeField]
+    private float itemSpawnForce;
+
+
 
 
 
@@ -103,18 +113,6 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(PlayGhostsAnimation());
         setPlayState();
-
-
-        crown.GetComponent<CircleCollider2D>().enabled = true;
-        Rigidbody2D rb = crown.GetComponent<Rigidbody2D>();
-        rb.isKinematic = false;
-        rb.AddTorque((45 * Mathf.Deg2Rad) * rb.inertia, ForceMode2D.Impulse);
-
-        //SelectGhostSkin();
-
-        //PlayANim
-
-        
         
     }
 
@@ -123,10 +121,13 @@ public class GameManager : MonoBehaviour
         
         ghostsAnimator.SetBool("startedPlaying", true);
         playScript.InstantiateGhosts(ghostPrefabs[selectedGhostSkinId]);
-        //float animationLength = ghostsAnimator.GetCurrentAnimatorStateInfo(0).length;
-        //yield return new WaitForSecondsRealtime(animationLength);
-        yield return new WaitForSeconds(10);
-        
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        crown.GetComponent<CircleCollider2D>().enabled = true;
+        Rigidbody2D rb = crown.GetComponent<Rigidbody2D>();
+        rb.isKinematic = false;
+        rb.AddTorque((45 * Mathf.Deg2Rad) * rb.inertia, ForceMode2D.Impulse);
+
     }
 
     
@@ -227,6 +228,7 @@ public class GameManager : MonoBehaviour
 
         ghostsAnimator.SetBool("startedPlaying", false);
         playScript.DestroyInstantiatedGhosts();
+        title.text = "CROWN GAME";
 
         setMenuState();
         playScript.resetPlayButton();
@@ -246,6 +248,21 @@ public class GameManager : MonoBehaviour
         {
             topCrownScoreText.text = totalTouches.ToString();
         }
+    }
+
+    public void InstantiateTrophyRandomItem()
+    {
+        GameObject randomItem =  Instantiate(trophyItemPrefab, trophyItemSpawnPos);
+        randomItem.GetComponent<Image>().sprite = randomDropItems[Random.Range(0, randomDropItems.Length)];
+        randomItem.GetComponent<Rigidbody2D>().AddForce(trophyItemSpawnPos.up * itemSpawnForce, ForceMode2D.Impulse);
+        StartCoroutine(DestroyItem(randomItem));
+        
+    }
+
+    IEnumerator DestroyItem(GameObject item)
+    {
+        yield return new WaitForSecondsRealtime(10);
+        Destroy(item);
     }
 
     private void Update()

@@ -30,6 +30,12 @@ public class UIAudioManagerScript : MonoBehaviour
     private string button3Event = null;
 
     [SerializeField]
+    private string heartButton = null;
+
+    [SerializeField]
+    private string trophyButton = null;
+
+    [SerializeField]
     private string crownTouch = null;
 
     [SerializeField]
@@ -64,6 +70,20 @@ public class UIAudioManagerScript : MonoBehaviour
         if (button3Event != null)
         {
             RuntimeManager.PlayOneShot(button3Event);
+        }
+    }
+    public void PlayHeartButtonEvent()
+    {
+        if (heartButton != null)
+        {
+            RuntimeManager.PlayOneShot(heartButton);
+        }
+    }
+    public void PlayTrophyButtonEvent()
+    {
+        if (trophyButton != null)
+        {
+            RuntimeManager.PlayOneShot(trophyButton);
         }
     }
 

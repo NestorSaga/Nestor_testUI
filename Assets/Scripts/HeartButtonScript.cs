@@ -8,7 +8,7 @@ public class HeartButtonScript : MonoBehaviour
 
     public void onClickBurstHearts()
     {
-        Debug.Log("cue");
+        UIAudioManagerScript.instance.PlayHeartButtonEvent();
         heartParticles.Play();
     }
 }

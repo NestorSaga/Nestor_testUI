@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6825531472026335351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CrownTouch
+  m_EditorClassIdentifier: 
+  Path: event:/CrownTouch
+  Guid:
+    Data1: -158844796
+    Data2: 1252048102
+    Data3: 767633040
+    Data4: 1691409468
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 72
 --- !u!114 &-4976847247505631177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 166892
+--- !u!114 &-4748419074480849975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_3
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_3
+  Guid:
+    Data1: 174981577
+    Data2: 1167778276
+    Data3: 1405249418
+    Data4: -1241239453
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 62
 --- !u!114 &-4396674468822810714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +96,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638351770394628929
+  lastModified: 638352138920082405
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -62,13 +116,101 @@ MonoBehaviour:
   - {fileID: -4396674468822810714}
   EditorEvents:
   - {fileID: -4976847247505631177}
+  - {fileID: 2954013147035358200}
+  - {fileID: 8170361212534634582}
+  - {fileID: 8865642727874826296}
+  - {fileID: -6825531472026335351}
+  - {fileID: -4748419074480849975}
+  - {fileID: 1206689479268543335}
+  - {fileID: 990270235159341196}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4396674468822810714}
   StringsBanks:
   - {fileID: 8002320337867146073}
-  cacheTime: 638351770394638900
+  cacheTime: 638352138920092404
   cacheVersion: 131609
+--- !u!114 &990270235159341196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TrophyButton
+  m_EditorClassIdentifier: 
+  Path: event:/TrophyButton
+  Guid:
+    Data1: -903815882
+    Data2: 1183123978
+    Data3: -882942832
+    Data4: -2004626836
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 250
+--- !u!114 &1206689479268543335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/HeartButton
+  m_EditorClassIdentifier: 
+  Path: event:/HeartButton
+  Guid:
+    Data1: 1545367216
+    Data2: 1335258033
+    Data3: -770540108
+    Data4: -365914419
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 70
+--- !u!114 &2954013147035358200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Completed
+  m_EditorClassIdentifier: 
+  Path: event:/Completed
+  Guid:
+    Data1: -360273650
+    Data2: 1136052200
+    Data3: 321922205
+    Data4: 2098138921
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 530
 --- !u!114 &8002320337867146073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,8 +226,62 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638351770394638900
+  lastModified: 638352138920092404
   FileSizes:
   - Name: 
-    Value: 758
+    Value: 1068
   Exists: 1
+--- !u!114 &8170361212534634582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_2
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_2
+  Guid:
+    Data1: -34525378
+    Data2: 1332751249
+    Data3: -178104922
+    Data4: 1861219309
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 76
+--- !u!114 &8865642727874826296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick_1
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick_1
+  Guid:
+    Data1: 1453618048
+    Data2: 1239411140
+    Data3: -1723292236
+    Data4: 1638216254
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 72
