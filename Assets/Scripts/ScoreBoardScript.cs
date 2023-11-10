@@ -5,14 +5,13 @@ using UnityEngine;
 public class ScoreBoardScript : MonoBehaviour
 {
 
+    [Header("References")]
     [SerializeReference]
     private Animator scoreAnimator;
-
     private bool isScoreBoardOut;
 
     public void OnClickPopupScoreBoard()
     {
-
         UIAudioManagerScript.instance.PlayButton2Event();
 
         if (!isScoreBoardOut)
@@ -31,13 +30,5 @@ public class ScoreBoardScript : MonoBehaviour
     {
         scoreAnimator.SetBool("ScorePopup", false);
         isScoreBoardOut = false;
-    }
-
-    private void Update()
-    {
-        /*if(Input.GetMouseButtonDown(0) && isScoreBoardOut)
-        {
-            OnClickPopoutScoreBoard();
-        }*/
     }
 }

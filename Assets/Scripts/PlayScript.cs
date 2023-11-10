@@ -21,14 +21,14 @@ public class PlayScript : MonoBehaviour
     private Transform leftAnchor, rightAnchor;
 
     [Header("Utils")]
+    [SerializeField]
+    private float lateralReboundForce;
     private GameObject instancedLeftGhost, instancedRightGhost;
+
 
     private void Start()
     {
-
         buttonStartingPos = playButton.transform.position;
-
-        Debug.Log("anchored pos is "+ buttonStartingPos);
     }
 
     void Update()
@@ -36,22 +36,15 @@ public class PlayScript : MonoBehaviour
         if(GameManager.instance.state == GameManager.State.PLAY)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             mousePosition.z = Camera.main.transform.position.z + Camera.main.nearClipPlane;
-
             playButton.transform.position = mousePosition;
-            
-            /*Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = Vector2.MoveTowards(transform.position, mousePosition, 10 * Time.deltaTime);
-            */
         }
     }
 
     public void OnClickStartPlay()
     {
-
         UIAudioManagerScript.instance.PlayButton1Event();
-        transform.parent = playParent.transform;
+        transform.SetParent(playParent.transform);
         GameManager.instance.StartCrownGame();
         playButton.transform.GetChild(0).GetComponent<Button>().interactable = false;
     }
@@ -63,6 +56,11 @@ public class PlayScript : MonoBehaviour
             if(collision.transform.position.x > transform.position.x)
             {
                 Debug.Log("right");
+                collision.transform.GetComponent<Rigidbody2D>().AddForce(transform.right * lateralReboundForce, ForceMode2D.Impulse);
+            }
+            else if(collision.transform.position.x < transform.position.x)
+            {
+                collision.transform.GetComponent<Rigidbody2D>().AddForce(-transform.right * lateralReboundForce, ForceMode2D.Impulse);
             }
             UIAudioManagerScript.instance.PlayCrownTouchEvent();
             GameManager.instance.IncreaseCrownScore();
@@ -73,10 +71,7 @@ public class PlayScript : MonoBehaviour
     public void resetPlayButton()
     {
         playButton.transform.position = new Vector3(buttonStartingPos.x, buttonStartingPos.y, buttonStartingPos.z);
-
-        transform.parent = UIparent.transform;
-
-        Debug.Log("resetted to " + new Vector3(buttonStartingPos.x, buttonStartingPos.y, buttonStartingPos.z));
+        transform.SetParent(UIparent.transform);
         playButton.transform.GetChild(0).GetComponent<Button>().interactable = true;
     }
 
@@ -84,8 +79,6 @@ public class PlayScript : MonoBehaviour
     {
         instancedLeftGhost = Instantiate(ghost, leftAnchor);
         instancedRightGhost = Instantiate(ghost, rightAnchor);
-
-        Debug.Log("instanciaos");
     }
 
     public void DestroyInstantiatedGhosts()

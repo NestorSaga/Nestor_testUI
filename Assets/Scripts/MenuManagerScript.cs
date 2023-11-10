@@ -19,6 +19,7 @@ public class MenuManagerScript : MonoBehaviour
 
     public void OnClickMenuSwap()
     {
+        GameManager.instance.HidePopoupScore();
         disableNotification();
         UIAudioManagerScript.instance.PlayButton3Event();
         animator.SetBool("SwapMenu", true);
@@ -38,7 +39,12 @@ public class MenuManagerScript : MonoBehaviour
 
     public void disableNotification()
     {
-        isNotificationOn = false;
-        notification.SetActive(false);
+        if (isNotificationOn)
+        {
+            isNotificationOn = false;
+            notification.SetActive(false);
+            isNotificationOn = !isNotificationOn;
+        }
+        
     }
 }

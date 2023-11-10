@@ -5,10 +5,6 @@ using FMODUnity;
 
 public class UIAudioManagerScript : MonoBehaviour
 {
-
-
-
-
     public static UIAudioManagerScript instance { get; private set; }
     private void Awake()
     {
@@ -39,7 +35,13 @@ public class UIAudioManagerScript : MonoBehaviour
     private string crownTouch = null;
 
     [SerializeField]
+    private string ghostSelect = null;
+
+    [SerializeField]
     private string completed = null;
+
+    [SerializeField]
+    private string itemDrop = null;
 
     public void PlayMenuMusicEvent()
     {
@@ -94,12 +96,27 @@ public class UIAudioManagerScript : MonoBehaviour
             RuntimeManager.PlayOneShot(crownTouch);
         }
     }
+    public void PlayGhostSelectEvent()
+    {
+        if (ghostSelect != null)
+        {
+            RuntimeManager.PlayOneShot(ghostSelect);
+        }
+    }
 
     public void PlayCompletedEvent()
     {
         if (completed != null)
         {
             RuntimeManager.PlayOneShot(completed);
+        }
+    }
+
+    public void PlayItemDropEvent()
+    {
+        if (itemDrop != null)
+        {
+            RuntimeManager.PlayOneShot(itemDrop);
         }
     }
 

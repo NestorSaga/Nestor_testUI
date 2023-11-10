@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638352138920082405
+  lastModified: 638352240183243028
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -123,12 +123,14 @@ MonoBehaviour:
   - {fileID: -4748419074480849975}
   - {fileID: 1206689479268543335}
   - {fileID: 990270235159341196}
+  - {fileID: 4779279484496843009}
+  - {fileID: 6078780647830195514}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4396674468822810714}
   StringsBanks:
   - {fileID: 8002320337867146073}
-  cacheTime: 638352138920092404
+  cacheTime: 638352240183253038
   cacheVersion: 131609
 --- !u!114 &990270235159341196
 MonoBehaviour:
@@ -211,6 +213,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 530
+--- !u!114 &4779279484496843009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GhostSelect
+  m_EditorClassIdentifier: 
+  Path: event:/GhostSelect
+  Guid:
+    Data1: 1247141287
+    Data2: 1094528434
+    Data3: -1194600775
+    Data4: -1901475799
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 75
+--- !u!114 &6078780647830195514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ItemDrop
+  m_EditorClassIdentifier: 
+  Path: event:/ItemDrop
+  Guid:
+    Data1: 1023935030
+    Data2: 1209404409
+    Data3: -1418896728
+    Data4: 1908772012
+  Banks:
+  - {fileID: -4396674468822810714}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 380
 --- !u!114 &8002320337867146073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,10 +282,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638352138920092404
+  lastModified: 638352240183253038
   FileSizes:
   - Name: 
-    Value: 1068
+    Value: 1148
   Exists: 1
 --- !u!114 &8170361212534634582
 MonoBehaviour:

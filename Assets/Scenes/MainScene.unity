@@ -6802,6 +6802,7 @@ MonoBehaviour:
   crown: {fileID: 690544155}
   trophyItemSpawnPos: {fileID: 919905333}
   trophyItemPrefab: {fileID: 7771173524180908284, guid: 97f5f086e48f03242a5ed6d7d494fc7e, type: 3}
+  floorCollision: {fileID: 1497860553}
   playScript: {fileID: 1837123478}
   title: {fileID: 793161520}
   topCrownScoreText: {fileID: 2031995023}
@@ -6825,7 +6826,9 @@ MonoBehaviour:
   touchesForSkin1Unlock: 25
   touchesForSkin2Unlock: 100
   touchesForSkin3Unlock: 200
-  itemSpawnForce: 5
+  itemSpawnForce: 2.5
+  timeToDestroyItem: 10
+  ghostAnimationWaitTime: 1.5
   state: 0
 --- !u!114 &732196387
 MonoBehaviour:
@@ -6859,7 +6862,9 @@ MonoBehaviour:
   heartButton: event:/HeartButton
   trophyButton: event:/TrophyButton
   crownTouch: event:/CrownTouch
+  ghostSelect: event:/GhostSelect
   completed: event:/Completed
+  itemDrop: event:/ItemDrop
 --- !u!114 &732196389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6942,7 +6947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.25}
+  m_AnchoredPosition: {x: 0, y: -59}
   m_SizeDelta: {x: 1911, y: 1441.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &767488976
@@ -7126,10 +7131,28 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
-      value: 1.8394547
-      inSlope: 0
-      outSlope: 0
+      time: 0.26708397
+      value: 1.3284284
+      inSlope: 1.5848978
+      outSlope: 1.5848978
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4926408
+      value: 1.4990515
+      inSlope: -0.08069457
+      outSlope: -0.08069457
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2926364
+    - serializedVersion: 3
+      time: 0.69776493
+      value: 1.3802152
+      inSlope: -1.3711619
+      outSlope: -1.3711619
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -7378,7 +7401,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.6154785, y: -0.000061035156}
+  m_Offset: {x: 1.6154785, y: 106}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7389,7 +7412,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1917.2639, y: 1073.7496}
+  m_Size: {x: 1917.2639, y: 1177.2}
   m_EdgeRadius: 0
 --- !u!114 &915585689
 MonoBehaviour:
@@ -7899,6 +7922,7 @@ MonoBehaviour:
   animationClipRotateIn: {fileID: 7400000, guid: 7b4722abf7e0e0a46a8a40b6d41d2eaa, type: 2}
   animationClipRotateBack: {fileID: 7400000, guid: 0212613ac6f51914cb1746e3f08afae8, type: 2}
   animation: {fileID: 1117420585}
+  buttonRotationResetTime: 1
 --- !u!111 &1117420585
 Animation:
   m_ObjectHideFlags: 0
@@ -8663,8 +8687,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Unlockable ghost skins!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b5c97bd49d7f866499c1a98242219841, type: 2}
+  m_sharedMaterial: {fileID: -2540024057970282586, guid: b5c97bd49d7f866499c1a98242219841, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8688,7 +8712,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.55
+  m_fontSize: 44.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8727,7 +8751,7 @@ MonoBehaviour:
   m_margin: {x: -20.30494, y: 11.330605, z: -0.83277893, w: 7.2881927}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1449555172
@@ -9205,7 +9229,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1863.3464, y: 71.98889}
+  m_Size: {x: 1991.14, y: 71.98889}
   m_EdgeRadius: 0
 --- !u!1 &1517965256
 GameObject:
@@ -9726,6 +9750,7 @@ MonoBehaviour:
   playParent: {fileID: 1997167105}
   leftAnchor: {fileID: 1871102952}
   rightAnchor: {fileID: 584199455}
+  lateralReboundForce: 2
 --- !u!95 &1837123479
 Animator:
   serializedVersion: 5

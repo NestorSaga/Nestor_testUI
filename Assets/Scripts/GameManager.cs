@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject trophyItemPrefab;
     [SerializeField]
+    private Transform floorCollision;
+    [SerializeField]
     private PlayScript playScript;
     [SerializeField]
     private TextMeshProUGUI title;
@@ -57,11 +59,10 @@ public class GameManager : MonoBehaviour
     private int touchesForSkin3Unlock;
     [SerializeField]
     private float itemSpawnForce;
-
-
-
-
-
+    [SerializeField]
+    private float timeToDestroyItem;
+    [SerializeField]
+    private float ghostAnimationWaitTime;
 
 
     public static GameManager instance { get; private set; }
@@ -69,9 +70,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null && instance != this) Destroy(this);
         else instance = this;
-    }
-
-    
+    } 
 
     public enum State
     {
@@ -98,6 +97,7 @@ public class GameManager : MonoBehaviour
         menuManagerScript = GetComponent<MenuManagerScript>();
         startingCrownPos = crown.transform.position;
         rb = crown.GetComponent<Rigidbody2D>();
+        Physics2D.IgnoreCollision(crown.transform.GetComponent<CircleCollider2D>(), floorCollision.GetComponent<BoxCollider2D>());
 
         UIAudioManagerScript.instance.PlayMenuMusicEvent();
 
@@ -109,11 +109,15 @@ public class GameManager : MonoBehaviour
 
         Cursor.visible = false;
         totalTouches = 0;
-        scoreBoardScript.OnClickPopoutScoreBoard();
-
+        HidePopoupScore();
         StartCoroutine(PlayGhostsAnimation());
         setPlayState();
         
+    }
+
+    public void HidePopoupScore()
+    {
+        scoreBoardScript.OnClickPopoutScoreBoard();
     }
 
     private IEnumerator PlayGhostsAnimation()
@@ -121,7 +125,7 @@ public class GameManager : MonoBehaviour
         
         ghostsAnimator.SetBool("startedPlaying", true);
         playScript.InstantiateGhosts(ghostPrefabs[selectedGhostSkinId]);
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(ghostAnimationWaitTime);
 
         crown.GetComponent<CircleCollider2D>().enabled = true;
         Rigidbody2D rb = crown.GetComponent<Rigidbody2D>();
@@ -133,7 +137,7 @@ public class GameManager : MonoBehaviour
     
     public void SelectGhostSkin(int id)
     {
-
+        UIAudioManagerScript.instance.PlayGhostSelectEvent();
         switch (id)
         {
             case 0:
@@ -147,8 +151,9 @@ public class GameManager : MonoBehaviour
                 if (isSkin1Unlocked)
                 {
                     skinDescriptionText.text = "Touching grass is important!";
-                    skinBackgrounds[id].color = selectedColor;
                     skinBackgrounds[selectedGhostSkinId].color = selectableColor;
+                    skinBackgrounds[id].color = selectedColor;
+                    
                     selectedGhostSkinId = id;
                 }
                 break;
@@ -157,8 +162,8 @@ public class GameManager : MonoBehaviour
                 if (isSkin2Unlocked)
                 {
                     skinDescriptionText.text = "Nothing beats chicken";
-                    skinBackgrounds[id].color = selectedColor;
                     skinBackgrounds[selectedGhostSkinId].color = selectableColor;
+                    skinBackgrounds[id].color = selectedColor;
                     selectedGhostSkinId = id;
                 }
                 break;
@@ -167,8 +172,8 @@ public class GameManager : MonoBehaviour
                 if (isSkin3Unlocked)
                 {
                     skinDescriptionText.text = "A true proof of skill";
-                    skinBackgrounds[id].color = selectedColor;
                     skinBackgrounds[selectedGhostSkinId].color = selectableColor;
+                    skinBackgrounds[id].color = selectedColor;
                     selectedGhostSkinId = id;
                 }
                 break;
@@ -225,7 +230,6 @@ public class GameManager : MonoBehaviour
 
     public void EndCrownGame()
     {
-
         ghostsAnimator.SetBool("startedPlaying", false);
         playScript.DestroyInstantiatedGhosts();
         title.text = "CROWN GAME";
@@ -247,6 +251,7 @@ public class GameManager : MonoBehaviour
         if (totalTouches > topTouches)
         {
             topCrownScoreText.text = totalTouches.ToString();
+            topTouches = totalTouches;
         }
     }
 
@@ -254,23 +259,14 @@ public class GameManager : MonoBehaviour
     {
         GameObject randomItem =  Instantiate(trophyItemPrefab, trophyItemSpawnPos);
         randomItem.GetComponent<Image>().sprite = randomDropItems[Random.Range(0, randomDropItems.Length)];
-        randomItem.GetComponent<Rigidbody2D>().AddForce(trophyItemSpawnPos.up * itemSpawnForce, ForceMode2D.Impulse);
-        StartCoroutine(DestroyItem(randomItem));
-        
+        randomItem.GetComponent<Rigidbody2D>().AddForce(trophyItemSpawnPos.up * Random.Range(itemSpawnForce, itemSpawnForce * 2), ForceMode2D.Impulse);
+        StartCoroutine(DestroyItem(randomItem));    
     }
 
     IEnumerator DestroyItem(GameObject item)
     {
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(timeToDestroyItem);
         Destroy(item);
     }
-
-    private void Update()
-    {
-
-    }
-
-
-
 
 }

@@ -9,19 +9,17 @@ public class TrophyButtonScript : MonoBehaviour
     [SerializeField]
     private AnimationClip animationClipRotateIn, animationClipRotateBack;
     [SerializeField]
-    private Animation animation;
-    private Animator animator;
+    private new Animation animation;
 
     [Header("Utils")]
+    [SerializeField]
+    private float buttonRotationResetTime;
     private bool isRotated;
-
-    private void Start()
-    {
-        //animationClip = GetComponent<AnimationClip>();
-    }
+    
 
     public void OnClickRotate()
     {
+        GameManager.instance.HidePopoupScore();
         if (!isRotated)
         {
             StartCoroutine(RotateAnimation());
@@ -40,10 +38,12 @@ public class TrophyButtonScript : MonoBehaviour
         //Instantiate random item
         GameManager.instance.InstantiateTrophyRandomItem();
 
+        UIAudioManagerScript.instance.PlayItemDropEvent();
+
         animation.clip = animationClipRotateBack;
         animation.Play();
 
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(buttonRotationResetTime);
 
         isRotated = false;
     }
